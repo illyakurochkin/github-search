@@ -19,7 +19,6 @@ class App extends React.Component {
         }
       }
     );
-    console.log(response);
     this.setState({repositories: response.data.items, isSearching: false});
   };
 

@@ -37,7 +37,6 @@ class Repository extends React.Component {
   state = {active: false};
 
   onHover = () => {
-    console.log('hover');
     this.setState({active: true});
   };
 
