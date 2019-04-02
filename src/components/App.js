@@ -7,38 +7,39 @@ import github from '../apis/github';
 
 
 class App extends React.Component {
-
-  state = { repositories: [], isSearching: false };
+  state = {repositories: null, isSearching: false};
 
   onSearchSubmit = async (query) => {
-  	this.setState({ isSearching: true });
+    this.setState({isSearching: true});
     const response = await github.get(
       '/search/repositories',
       {
         params: {
           q: query
-       }
+        }
       }
     );
     console.log(response);
-    this.setState({ repositories: response.data.items, isSearching: false });
+    this.setState({repositories: response.data.items, isSearching: false});
   };
 
   renderRepositoryList() {
-  	if(this.state.isSearching) {
-  		return <Loader />
-  	}
+    const {state} = this;
 
-  	return <RepositoryList repositories={this.state.repositories}/>;
+    if (state.isSearching) {
+      return <Loader />;
+    }
+
+    return <RepositoryList repositories={state.repositories} />;
   }
 
   render() {
     return (
       <div className="ui very padded container">
-      <Header />
-      <SearchBar onSubmit={this.onSearchSubmit} />
-      <div className="ui hidden divider"></div>
-       	{this.renderRepositoryList()}
+        <Header />
+        <SearchBar onSubmit={this.onSearchSubmit} />
+        <div className="ui hidden divider" />
+        {this.renderRepositoryList()}
       </div>
     );
   }

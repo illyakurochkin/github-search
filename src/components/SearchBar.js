@@ -17,15 +17,20 @@ class SearchBar extends React.Component {
   render() {
     const {state} = this;
     return (
-		<div className="ui huge center aligned container">
-			<form className="search-bar ui search" onSubmit={this.onFormSubmit} >
-				<div className={`ui left icon input ${this.state.isLoading ? 'loading' : ''}`}>
-				  <input className="prompt" 
-				  onChange={this.onInputChange} value={this.state.query} type="text" placeholder="Search..." />
-				  <i className="search icon"></i>
-				</div>
-			</form>
-		</div>
+      <div className="ui huge center aligned container">
+        <form className="search-bar ui search" onSubmit={this.onFormSubmit}>
+          <div className={`ui left icon input ${state.isLoading ? 'loading' : ''}`}>
+            <input
+              className="prompt"
+              onChange={this.onInputChange}
+              value={state.query}
+              type="text"
+              placeholder="Search..."
+            />
+            <i className="search icon" />
+          </div>
+        </form>
+      </div>
     );
   }
 }
